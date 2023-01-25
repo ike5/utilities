@@ -1,6 +1,7 @@
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 const LoginPage = () => {
 	const supabaseClient = useSupabaseClient();
@@ -9,7 +10,7 @@ const LoginPage = () => {
 
 	useEffect(() => {
 		async function loadData() {
-			const { data } = await supabaseClient.from('test').select('*');
+			const { data }: any = await supabaseClient.from('test').select('*');
 			setData(data);
 		}
 		// Only run query once user is logged in.
@@ -22,8 +23,8 @@ const LoginPage = () => {
 				redirectTo='http://localhost:3000/'
 				appearance={{ theme: ThemeSupa }}
 				supabaseClient={supabaseClient}
-				providers={['google', 'github']}
-				socialLayout='horizontal'
+				// providers={['google', 'github']}
+				socialLayout='vertical'
 			/>
 		);
 
@@ -36,6 +37,12 @@ const LoginPage = () => {
 			<pre>{JSON.stringify(user, null, 2)}</pre>
 			<p>client-side data fetching with RLS</p>
 			<pre>{JSON.stringify(data, null, 2)}</pre>
+			<Link href='/'>
+				<button>Home</button>
+			</Link>
+			<Link href='/profile'>
+				<button>Profile</button>
+			</Link>
 		</>
 	);
 };
