@@ -31,10 +31,10 @@ export default function Avatar({ user, url, size }) {
 		<div>
 			{avatarUrl ? (
 				<div className='avatar'>
-					<div className='w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
+					<div className='w-16 rounded'>
 						<Image
-							width={150}
-							height={150}
+							width={size}
+							height={size}
 							src={avatarUrl}
 							alt='Avatar'
 						/>
@@ -46,11 +46,11 @@ export default function Avatar({ user, url, size }) {
 					style={{ height: size, width: size }}
 				/>
 			)}
-			<div style={{ width: size }}>
+			{/* <div style={{ width: size }}>
 				<label className='' htmlFor='single'>
 					<h1>{user.email}</h1>
 				</label>
-			</div>
+			</div> */}
 		</div>
 	);
 }

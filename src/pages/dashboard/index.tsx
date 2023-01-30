@@ -13,6 +13,7 @@ import {
 	IoCogOutline,
 	IoExitOutline,
 } from 'react-icons/io5';
+import BasicAvatar from './BasicAvatar';
 
 export default function Dashboard({
 	session,
@@ -29,6 +30,7 @@ export default function Dashboard({
 
 	useEffect(() => {
 		getProfile();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [session]);
 
 	async function signOut() {
@@ -76,6 +78,9 @@ export default function Dashboard({
 		<>
 			<div className='navigation'>
 				<ul className='list'>
+					<li className='grid justify-center mb-8'>
+						<BasicAvatar user={user} url={avatar_url} size={150} />
+					</li>
 					<li onClick={onClickActiveLink} className='list active'>
 						<Link href='/'>
 							<span className='icon'>
