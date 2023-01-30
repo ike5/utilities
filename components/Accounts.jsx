@@ -131,6 +131,9 @@ export default function Account({ session }) {
 						Sign Out
 					</button>
 				</div>
+				<div>
+					<Link href='/users'>Users</Link>
+				</div>
 			</div>
 		</>
 	);

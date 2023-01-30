@@ -1,16 +1,29 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import { Inter } from '@next/font/google';
-import styles from '@/styles/Home.module.css';
-import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
+import React from 'react';
+// import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Accounts from '../../components/Accounts';
-
-const inter = Inter({ subsets: ['latin'] });
+import Link from 'next/link';
 
 export default function Home() {
 	const session = useSession();
 	const supabase = useSupabaseClient();
+	const [username, setUsername] = React.useState('');
+	const [password, setPassword] = React.useState('');
+
+	async function buttonHandler(
+		event:
+			| React.MouseEvent<HTMLButtonElement>
+			| React.KeyboardEvent<HTMLHtmlElement>
+	) {
+		event.preventDefault();
+		const { data, error } = await supabase.auth.signInWithPassword({
+			email: username,
+			password: password,
+		});
+		console.log(data);
+	}
+
 	return (
 		<>
 			<Head>
@@ -28,11 +41,84 @@ export default function Home() {
 
 			<div>
 				{!session ? (
-					<Auth
-						supabaseClient={supabase}
-						appearance={{ theme: ThemeSupa }}
-						theme='dark'
-					/>
+					<div className='hero min-h-screen bg-base-200'>
+						<div className='hero-content flex-col lg:flex-row-reverse'>
+							<div className='text-center lg:text-left'>
+								<h1 className='text-5xl font-bold'>
+									Login now!
+								</h1>
+								<p className='py-6'>
+									Provident cupiditate voluptatem et in.
+									Quaerat fugiat ut assumenda excepturi
+									exercitationem quasi. In deleniti eaque aut
+									repudiandae et a id nisi.
+								</p>
+							</div>
+							<div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
+								<div className='card-body'>
+									<div className='form-control'>
+										<label className='label'>
+											<span className='label-text'>
+												Email
+											</span>
+										</label>
+										<input
+											onChange={(e) => {
+												setUsername(e.target.value);
+											}}
+											type='text'
+											placeholder='email'
+											className='input input-bordered'
+										/>
+									</div>
+									<div className='form-control'>
+										<label className='label'>
+											<span className='label-text'>
+												Password
+											</span>
+										</label>
+										<input
+											onChange={(e) => {
+												setPassword(e.target.value);
+											}}
+											type='password'
+											placeholder='password'
+											className='input input-bordered'
+										/>
+										<label className='label'>
+											<Link href='reset-password'>
+												Forgot password?
+											</Link>
+										</label>
+									</div>
+									<div className='form-control mt-6'>
+										<button
+											onClick={buttonHandler}
+											className='btn btn-primary'
+										>
+											Login
+										</button>
+									</div>
+									<div>
+										<p className='text-center mt-4'>
+											<Link href='signup'> Sign up</Link>
+											<Link href='/'> Home</Link>
+											<Link href='/dashboard'>
+												{' '}
+												Dashboard
+											</Link>
+											<Link href={'users'}> Users</Link>
+											<Link href={'profile'}>
+												{' '}
+												Profile
+											</Link>
+											<Link href={'error'}> Error</Link>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				) : (
 					<Accounts session={session} />
 				)}
