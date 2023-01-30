@@ -14,6 +14,7 @@ import {
 	IoExitOutline,
 } from 'react-icons/io5';
 import BasicAvatar from './BasicAvatar';
+import { isBindingElement } from 'typescript';
 
 export default function Dashboard({
 	session,
@@ -65,13 +66,11 @@ export default function Dashboard({
 		}
 	}
 
-	// use the ref in the component
-	const onClickActiveLink = (event) => {
-		// listRef.current.forEach((item: any) => {
-		// 	item.classList.remove('active');
-		// 	this.classList.add('active');
-		// });
-		alert(`Clicked on active link!${event.target.value}`);
+	const className = 'list';
+	const [activeIndex, setActiveIndex] = useState(null);
+
+	const onClickActiveLink = (index: any) => {
+		setActiveIndex(index);
 	};
 
 	return (
@@ -79,9 +78,22 @@ export default function Dashboard({
 			<div className='navigation'>
 				<ul className='list'>
 					<li className='grid justify-center mb-8'>
-						<BasicAvatar user={user} url={avatar_url} size={150} />
+						<Link href={'profile'}>
+							<BasicAvatar
+								user={user}
+								url={avatar_url}
+								size={150}
+							/>
+						</Link>
 					</li>
-					<li onClick={onClickActiveLink} className='list active'>
+					<li
+						onClick={() => onClickActiveLink(0)}
+						className={
+							activeIndex === 0
+								? `${className} active`
+								: className
+						}
+					>
 						<Link href='/'>
 							<span className='icon'>
 								<IoHomeOutline />
@@ -90,7 +102,14 @@ export default function Dashboard({
 						</Link>
 					</li>
 
-					<li onClick={onClickActiveLink} className='list'>
+					<li
+						onClick={() => onClickActiveLink(1)}
+						className={
+							activeIndex === 1
+								? `${className} list active`
+								: className
+						}
+					>
 						<Link href='/profile'>
 							<span className='icon'>
 								<IoAccessibilityOutline />
@@ -99,7 +118,14 @@ export default function Dashboard({
 						</Link>
 					</li>
 
-					<li onClick={onClickActiveLink} className='list'>
+					<li
+						onClick={() => onClickActiveLink(2)}
+						className={
+							activeIndex === 2
+								? `${className} list active`
+								: className
+						}
+					>
 						<Link href='/messages'>
 							<span className='icon'>
 								<IoChatbubbleEllipsesOutline />
@@ -108,7 +134,14 @@ export default function Dashboard({
 						</Link>
 					</li>
 
-					<li onClick={onClickActiveLink} className='list'>
+					<li
+						onClick={() => onClickActiveLink(3)}
+						className={
+							activeIndex === 3
+								? `${className} list active`
+								: className
+						}
+					>
 						<Link href='/settings'>
 							<span className='icon'>
 								<IoCogOutline />
