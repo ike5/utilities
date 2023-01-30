@@ -4,6 +4,7 @@ import React from 'react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Accounts from '../../components/Accounts';
 import Link from 'next/link';
+import Dashboard from './dashboard';
 
 export default function Home() {
 	const session = useSession();
@@ -120,7 +121,7 @@ export default function Home() {
 						</div>
 					</div>
 				) : (
-					<Accounts session={session} />
+					<Dashboard session={session} />
 				)}
 			</div>
 		</>
