@@ -1,3 +1,144 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	min-height: 100dvh;
+}
+
+.container-grid {
+	display: grid;
+	grid-template-columns: min-content 1fr;
+	grid-template-rows: min-content 1fr;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	grid-template-areas:
+		'side nav'
+		'side main';
+}
+
+.nav {
+	grid-area: nav;
+}
+
+.side {
+	grid-area: side;
+}
+
+.main {
+	grid-area: main;
+}
+
+.navigation {
+	position: relative;
+	display: flex;
+	height: 100vh;
+	height: 100dvh;
+	width: 80px;
+	/* background: #2b343b; */
+	/* background: hsl(var(--b1)); */
+	/* background: hsl(var(--b3)); */
+	background: hsl(var(--n)); /* neutural */
+	/* box-shadow: 10px 0 0 #4187f6; */
+	box-shadow: 10px 0 0 hsl(var(--a));
+	/* border-left: 10px solid #2b343b; */
+	border-left: 10px solid hsl(var(--n));
+	overflow-x: hidden;
+	/* transition: width 0.5s; */
+	transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+.navigation:hover {
+	width: 300px;
+}
+.navigation ul {
+	position: absolute;
+	/* display: flex;
+	flex-direction: column;
+	justify-content:space-evenly; */
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding-left: 5px;
+	padding-top: 40px;
+}
+
+.navigation ul li {
+	position: relative;
+	list-style: none;
+	width: 100%;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	margin-top: 10px;
+}
+
+.navigation ul li.active {
+	/* background: #4187f6; */
+	background: hsl(var(--a));
+}
+
+.navigation ul li a {
+	position: relative;
+	width: 100%;
+	display: flex;
+	text-decoration: none;
+	color: #fff;
+}
+
+.navigation ul li.active a::before {
+	content: '';
+	position: absolute;
+	top: -30px;
+	right: 0;
+	width: 30px;
+	height: 30px;
+	/* box-shadow: 15px 15px 0 #4187f6; */
+	box-shadow: 15px 15px 0 hsl(var(--a));
+	/* background: #2b343b; */
+	background: hsl(var(--n));
+	border-radius: 50%;
+}
+.navigation ul li.active a::after {
+	content: '';
+	position: absolute;
+	bottom: -30px;
+	right: 0;
+	width: 30px;
+	height: 30px;
+	/* box-shadow: 15px -15px 0 #4187f6; */
+	box-shadow: 15px -15px 0 hsl(var(--a)); /* accent */
+	/* background: #2b343b; */
+	background: hsl(var(--n)); /* neutural */
+	border-radius: 50%;
+}
+
+.navigation ul li a .icon {
+	position: relative;
+	display: block;
+	min-width: 60px;
+	height: 60px;
+	line-height: 65px;
+	padding-left: 15px; /* this needs to be looked at */
+	padding-top: 17px;
+	text-align: center;
+	font-size: x-large;
+	z-index: 1;
+}
+
+.navigation ul li a .title {
+	position: relative;
+	display: block;
+	padding-left: 10px;
+	height: 60px;
+	line-height: 60px;
+	white-space: nowrap;
+}

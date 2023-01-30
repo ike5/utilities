@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import {
 	createServerSupabaseClient,
 	Session,
 	User,
 } from '@supabase/auth-helpers-nextjs';
-import BasicAvatar from '../../../components/BasicAvatar';
 import Link from 'next/link';
+import {
+	IoHomeOutline,
+	IoAccessibilityOutline,
+	IoChatbubbleEllipsesOutline,
+	IoCogOutline,
+	IoExitOutline,
+} from 'react-icons/io5';
 
 export default function Dashboard({
 	session,
@@ -57,54 +63,64 @@ export default function Dashboard({
 		}
 	}
 
+	// use the ref in the component
+	const onClickActiveLink = (event) => {
+		// listRef.current.forEach((item: any) => {
+		// 	item.classList.remove('active');
+		// 	this.classList.add('active');
+		// });
+		alert(`Clicked on active link!${event.target.value}`);
+	};
+
 	return (
 		<>
-			<div className='drawer drawer-mobile'>
-				<input
-					id='my-drawer-2'
-					type='checkbox'
-					className='drawer-toggle'
-				/>
+			<div className='navigation'>
+				<ul className='list'>
+					<li onClick={onClickActiveLink} className='list active'>
+						<Link href='/'>
+							<span className='icon'>
+								<IoHomeOutline />
+							</span>
+							<span className='title'>Home</span>
+						</Link>
+					</li>
 
-				<div className='drawer-content flex flex-col items-center justify-center'>
-					{/* <!-- Page content here --> */}
-					<label
-						htmlFor='my-drawer-2'
-						className='btn btn-primary drawer-button lg:hidden'
-					>
-						Open drawer
-					</label>
-				</div>
-				<div className='drawer-side flex'>
-					<label
-						htmlFor='my-drawer-2'
-						className='drawer-overlay'
-					></label>
-					<ul className='menu p-4 w-80 bg-base-100 text-base-content justify-start'>
-						{/* <!-- Sidebar content here --> */}
-						<BasicAvatar user={user} url={avatar_url} size={150} />
-						<li>
-							<Link href='/dashboard'>Dashboard</Link>
-						</li>
-						<li>
-							<Link href='users'>Users</Link>
-						</li>
+					<li onClick={onClickActiveLink} className='list'>
+						<Link href='/profile'>
+							<span className='icon'>
+								<IoAccessibilityOutline />
+							</span>
+							<span className='title'>Profile</span>
+						</Link>
+					</li>
 
-						<li>
-							<Link href='settings'>Settings</Link>
-						</li>
-						<li>
-							<div>
-								<button
-									className='btn-block btn btn-primary'
-									onClick={signOut}
-								>
-									Sign Out
-								</button>
-							</div>
-						</li>
-					</ul>
-				</div>
+					<li onClick={onClickActiveLink} className='list'>
+						<Link href='/messages'>
+							<span className='icon'>
+								<IoChatbubbleEllipsesOutline />
+							</span>
+							<span className='title'>Messages</span>
+						</Link>
+					</li>
+
+					<li onClick={onClickActiveLink} className='list'>
+						<Link href='/settings'>
+							<span className='icon'>
+								<IoCogOutline />
+							</span>
+							<span className='title'>Settings</span>
+						</Link>
+					</li>
+
+					<li onClick={signOut} className='list'>
+						<Link href='/'>
+							<span className='icon'>
+								<IoExitOutline />
+							</span>
+							<span className='title'>Sign Out</span>
+						</Link>
+					</li>
+				</ul>
 			</div>
 		</>
 	);
