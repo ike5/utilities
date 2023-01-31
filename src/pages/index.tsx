@@ -1,7 +1,10 @@
 import Head from 'next/head';
 import React from 'react';
-// import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
-import { Session, User, useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import {
+	User,
+	useSession,
+	useSupabaseClient,
+} from '@supabase/auth-helpers-react';
 import Link from 'next/link';
 import Dashboard from './dashboard';
 
@@ -11,22 +14,26 @@ export default function Home() {
 	const user = session?.user as User;
 	const [username, setUsername] = React.useState('');
 	const [password, setPassword] = React.useState('');
+	const [loading, setLoading] = React.useState(false);
 
-	async function buttonHandler(
-		event:
-			| React.MouseEvent<HTMLButtonElement>
-			| React.KeyboardEvent<HTMLHtmlElement>
-	) {
+	async function buttonHandler(event: any) {
 		event.preventDefault();
+
+		setLoading(true);
+		// Reset loading animation
+		setTimeout(() => {
+			setLoading(false);
+		}, 5000);
+
+		// Sign in
 		const { data, error } = await supabase.auth.signInWithPassword({
 			email: username,
 			password: password,
 		});
 		if (error) {
-			console.log(error);
+			alert(error.message);
+			setLoading(false);
 		}
-
-		console.log(data);
 	}
 
 	return (
@@ -69,6 +76,7 @@ export default function Home() {
 											setUsername(e.target.value);
 										}}
 										type='text'
+										autoFocus
 										placeholder='email'
 										className='input input-bordered'
 									/>
@@ -87,7 +95,7 @@ export default function Home() {
 										placeholder='password'
 										className='input input-bordered'
 									/>
-									<label className='label'>
+									<label className='label text-xs'>
 										<Link href='reset-password'>
 											Forgot password?
 										</Link>
@@ -96,22 +104,20 @@ export default function Home() {
 								<div className='form-control mt-6'>
 									<button
 										onClick={buttonHandler}
-										className='btn btn-primary'
+										className={
+											loading
+												? 'btn btn-primary loading'
+												: 'btn btn-primary'
+										}
 									>
 										Login
 									</button>
 								</div>
 								<div>
 									<p className='text-center mt-4'>
-										<Link href='signup'> Sign up</Link>
-										<Link href='/'> Home</Link>
-										<Link href='/dashboard'>
-											{' '}
-											Dashboard
+										<Link href='signup'>
+											Don&apos;t have an account?
 										</Link>
-										<Link href={'users'}> Users</Link>
-										<Link href={'profile'}> Profile</Link>
-										<Link href={'error'}> Error</Link>
 									</p>
 								</div>
 							</div>

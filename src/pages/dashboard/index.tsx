@@ -5,16 +5,8 @@ import {
 	Session,
 	User,
 } from '@supabase/auth-helpers-nextjs';
-import Link from 'next/link';
-import {
-	IoHomeOutline,
-	IoAccessibilityOutline,
-	IoChatbubbleEllipsesOutline,
-	IoCogOutline,
-	IoExitOutline,
-} from 'react-icons/io5';
 import BasicAvatar from './BasicAvatar';
-import { isBindingElement } from 'typescript';
+import { Sidebar } from './sidebar';
 
 export default function Dashboard({
 	session,
@@ -66,100 +58,9 @@ export default function Dashboard({
 		}
 	}
 
-	const className = 'list';
-	const [activeIndex, setActiveIndex] = useState(null);
-
-	const onClickActiveLink = (index: any) => {
-		setActiveIndex(index);
-	};
-
 	return (
 		<>
-			<div className='navigation'>
-				<ul className='list'>
-					<li className='grid justify-center mb-8'>
-						<Link href={'profile'}>
-							<BasicAvatar
-								user={user}
-								url={avatar_url}
-								size={150}
-							/>
-						</Link>
-					</li>
-					<li
-						onClick={() => onClickActiveLink(0)}
-						className={
-							activeIndex === 0
-								? `${className} active`
-								: className
-						}
-					>
-						<Link href='/'>
-							<span className='icon'>
-								<IoHomeOutline />
-							</span>
-							<span className='title'>Home</span>
-						</Link>
-					</li>
-
-					<li
-						onClick={() => onClickActiveLink(1)}
-						className={
-							activeIndex === 1
-								? `${className} list active`
-								: className
-						}
-					>
-						<Link href='/profile'>
-							<span className='icon'>
-								<IoAccessibilityOutline />
-							</span>
-							<span className='title'>Profile</span>
-						</Link>
-					</li>
-
-					<li
-						onClick={() => onClickActiveLink(2)}
-						className={
-							activeIndex === 2
-								? `${className} list active`
-								: className
-						}
-					>
-						<Link href='/messages'>
-							<span className='icon'>
-								<IoChatbubbleEllipsesOutline />
-							</span>
-							<span className='title'>Messages</span>
-						</Link>
-					</li>
-
-					<li
-						onClick={() => onClickActiveLink(3)}
-						className={
-							activeIndex === 3
-								? `${className} list active`
-								: className
-						}
-					>
-						<Link href='/settings'>
-							<span className='icon'>
-								<IoCogOutline />
-							</span>
-							<span className='title'>Settings</span>
-						</Link>
-					</li>
-
-					<li onClick={signOut} className='list'>
-						<Link href='/'>
-							<span className='icon'>
-								<IoExitOutline />
-							</span>
-							<span className='title'>Sign Out</span>
-						</Link>
-					</li>
-				</ul>
-			</div>
+			<Sidebar signOut={signOut} />
 		</>
 	);
 }
