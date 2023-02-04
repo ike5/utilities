@@ -14,7 +14,9 @@
 body {
 	min-height: 100vh;
 	min-height: 100dvh;
+	color-scheme: light dark;
 }
+
 
 .container-grid {
 	display: grid;
@@ -154,6 +156,6 @@ body {
 	grid-area: signout-area;
 } */
 
-.my-button{
-	all: unset;
+.character-limit {
+	max-width: 50ch;
 }

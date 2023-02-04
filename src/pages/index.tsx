@@ -36,6 +36,12 @@ export default function Home() {
 		}
 	}
 
+	function handleKeyPress(e: any) {
+		if (e.key === 'Enter') {
+			buttonHandler(e);
+		}
+	}
+
 	return (
 		<>
 			<Head>
@@ -56,11 +62,16 @@ export default function Home() {
 					<div className='hero-content flex-col lg:flex-row-reverse'>
 						<div className='text-center lg:text-left'>
 							<h1 className='text-5xl font-bold'>Login now!</h1>
-							<p className='py-6'>
-								Provident cupiditate voluptatem et in. Quaerat
-								fugiat ut assumenda excepturi exercitationem
-								quasi. In deleniti eaque aut repudiandae et a id
-								nisi.
+							<p className='py-6 character-limit'>
+								Lorem ipsum dolor sit amet, consectetur
+								adipisicing elit. Pariatur quia illo aliquam
+								officia, itaque asperiores error expedita
+								consequuntur. Qui tempora beatae modi eligendi
+								culpa voluptatibus molestiae explicabo incidunt
+								soluta ad. Provident cupiditate voluptatem et
+								in. Quaerat fugiat ut assumenda excepturi
+								exercitationem quasi. In deleniti eaque aut
+								repudiandae et a id nisi.
 							</p>
 						</div>
 						<div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
@@ -91,6 +102,7 @@ export default function Home() {
 										onChange={(e) => {
 											setPassword(e.target.value);
 										}}
+										onKeyDown={handleKeyPress}
 										type='password'
 										placeholder='password'
 										className='input input-bordered'
