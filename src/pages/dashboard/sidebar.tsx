@@ -12,11 +12,12 @@ import {
 } from 'react-icons/io5';
 
 export function Sidebar({ signOut }: { signOut: () => void }) {
-	const [className, setClassName] = useState('list');
+	const [className, setClassName] = useState('active');
 	const [activeIndex, setActiveIndex] = useState(null);
 
 	const onClickActiveLink = (index: any) => {
 		setActiveIndex(index);
+		setClassName('')
 	};
 
 	return (
@@ -24,7 +25,7 @@ export function Sidebar({ signOut }: { signOut: () => void }) {
 			<ul className=''>
 				<li
 					onClick={() => onClickActiveLink(0)}
-					className={activeIndex === 0 ? `active list` : `list`}
+					className={activeIndex === 0 ? `active list` : `${className} list`}
 				>
 					<Link href='/'>
 						<span className='icon'>
