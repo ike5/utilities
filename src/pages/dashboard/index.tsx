@@ -7,6 +7,7 @@ import {
 } from '@supabase/auth-helpers-nextjs';
 import BasicAvatar from './BasicAvatar';
 import { Sidebar } from './sidebar';
+import BaseHero from 'components/BaseHero';
 
 export default function Dashboard({
 	session,
@@ -59,9 +60,10 @@ export default function Dashboard({
 	}
 
 	return (
-		<>
+		<div className='container-grid'>
+			<BaseHero />
 			<Sidebar signOut={signOut} />
-		</>
+		</div>
 	);
 }
 
