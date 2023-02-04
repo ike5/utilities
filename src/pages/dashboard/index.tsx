@@ -61,7 +61,7 @@ export default function Dashboard({
 
 	return (
 		<div className='container-grid'>
-			<BaseHero />
+			<BaseHero user={user} session={session} />
 			<Sidebar signOut={signOut} />
 		</div>
 	);
