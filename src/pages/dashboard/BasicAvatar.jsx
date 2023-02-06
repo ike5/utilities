@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import Image from 'next/image';
 
-export default function Avatar({ user, url, size }) {
+export default function Avatar({ user, url }) {
 	const supabase = useSupabaseClient();
 	const [avatarUrl, setAvatarUrl] = useState(null);
-	const [uploading, setUploading] = useState(false);
 
 	useEffect(() => {
 		if (url) downloadImage(url);
@@ -33,17 +32,18 @@ export default function Avatar({ user, url, size }) {
 				<div className='avatar'>
 					<div className='w-16 rounded'>
 						<Image
-							width={size}
-							height={size}
+							width={75}
+							height={75}
 							src={avatarUrl}
 							alt='Avatar'
+							className='rounded-full w-12'
 						/>
 					</div>
 				</div>
 			) : (
 				<div
 					className='avatar no-image'
-					style={{ height: size, width: size }}
+					style={{ height: 75, width: 75 }}
 				/>
 			)}
 			{/* <div style={{ width: size }}>

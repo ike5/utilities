@@ -92,9 +92,9 @@ export default function BaseHero({
 						<span className='font-mono text-5xl'>{ampm}</span>
 					</div>
 				</div>
-				<div className='avatar'>
-					<Avatar user={user} url={avatar_url} size={300} />
-				</div>
+				{/* <div className='avatar'>
+					<Avatar user={user} url={avatar_url} />
+				</div> */}
 				<div className='top-left-box'>
 					<div className='hero'>
 						<div className='hero-content text-center'>

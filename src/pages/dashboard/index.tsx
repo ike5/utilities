@@ -5,10 +5,11 @@ import {
 	Session,
 	User,
 } from '@supabase/auth-helpers-nextjs';
-import BasicAvatar from './BasicAvatar';
-import { Sidebar } from './sidebar';
-import Sidebar2 from './sidebar2';
+import Sidebar from './Sidebar';
+import Messenger from 'components/messenger';
+import SidebarProvider from 'context/SidebarProvider';
 import BaseHero from 'components/BaseHero';
+import Main from 'components/Main';
 
 export default function Dashboard({
 	session,
@@ -17,59 +18,16 @@ export default function Dashboard({
 	session: Session;
 	user: User;
 }) {
-	const supabase = useSupabaseClient();
-	const [loading, setLoading] = useState(true);
-	const [username, setUsername] = useState(null);
-	const [website, setWebsite] = useState(null);
-	const [avatar_url, setAvatarUrl] = useState(null);
-
-	useEffect(() => {
-		getProfile();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [session]);
-
-	async function signOut() {
-		alert(`Signed out user: ${user.id}`);
-		await supabase.auth.signOut();
-	}
-
-	async function getProfile() {
-		try {
-			setLoading(true);
-
-			let { data, error, status } = await supabase
-				.from('profiles')
-				.select(`username, website, avatar_url`)
-				.eq('id', user.id)
-				.single();
-
-			if (error && status !== 406) {
-				throw error;
-			}
-
-			if (data) {
-				setUsername(data.username);
-				setWebsite(data.website);
-				setAvatarUrl(data.avatar_url);
-			}
-		} catch (error) {
-			alert('Error loading user data!');
-			console.log(error);
-		} finally {
-			setLoading(false);
-		}
-	}
-
 	return (
-		// <div className='container-grid'>
-		// 	<BaseHero user={user} session={session} />
-		// 	<Sidebar signOut={signOut} />
-		// </div>
 		<div className='flex'>
-			<aside className='flex-auto'>
-				<Sidebar2 />
-			</aside>
-			<main className='flex flex-auto'>Hello</main>
+			<SidebarProvider>
+				<aside className='flex-1'>
+					<Sidebar user={user} session={session} />
+				</aside>
+				<main className='flex-1'>
+					<Main />
+				</main>
+			</SidebarProvider>
 		</div>
 	);
 }

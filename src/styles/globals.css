@@ -17,32 +17,15 @@ body {
 	color-scheme: light dark;
 }
 
-.container-grid {
-	display: grid;
-	grid-template-columns: 80px 1fr;
-	grid-template-rows: min-content 1fr;
-	gap: 0px 0px;
-	grid-template-areas:
-		'side main'
-		'side main';
-}
-
-.side {
-	grid-area: side;
-}
-
-.main {
-	grid-area: main;
-}
 
 /* Sidebar Navigation */
-.navigation {
+/* .navigation {
 	position: absolute;
 	display: flex;
 	height: 100vh;
 	height: 100dvh;
 	width: 80px;
-	background: hsl(var(--n)); /* neutural */
+	background: hsl(var(--n)); 
 	box-shadow: 10px 0 0 hsl(var(--a));
 	border-left: 10px solid hsl(var(--n));
 	overflow-x: hidden;
@@ -95,8 +78,8 @@ body {
 	right: 0;
 	width: 30px;
 	height: 30px;
-	box-shadow: 15px -15px 0 hsl(var(--a)); /* accent */
-	background: hsl(var(--n)); /* neutural */
+	box-shadow: 15px -15px 0 hsl(var(--a));
+	background: hsl(var(--n));
 	border-radius: 50%;
 }
 .navigation ul li a .icon {
@@ -105,7 +88,7 @@ body {
 	min-width: 60px;
 	height: 60px;
 	line-height: 65px;
-	padding-left: 15px; /* this needs to be looked at */
+	padding-left: 15px;
 	padding-top: 17px;
 	text-align: center;
 	font-size: x-large;
@@ -118,7 +101,7 @@ body {
 	height: 60px;
 	line-height: 60px;
 	white-space: nowrap;
-}
+} */
 
 /* Hero */
 .character-limit {
