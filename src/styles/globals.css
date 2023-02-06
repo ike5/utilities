@@ -128,9 +128,10 @@ body {
 /* Dashboard grid */
 .dashboard-grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: min-content 1fr 1fr 1fr 1fr;
-	gap: 1em 1em;
+	grid-template-columns:  1fr 1fr 1fr;
+	grid-template-rows: min-content 1fr 1fr ;
+	gap: 0px 0px;
+	overflow: auto;
 	grid-auto-flow: row;
 	justify-content: stretch;
 	align-content: stretch;

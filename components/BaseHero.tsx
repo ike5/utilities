@@ -57,6 +57,8 @@ export default function BaseHero({
 	const [ampm, setAmpm] = useState('AM');
 
 	function showTime() {
+		// make sure time is in Los Angeles time
+
 		const date = new Date();
 		const [month, day, year] = [
 			date.getMonth(),
